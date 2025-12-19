@@ -8,9 +8,22 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
-    List<Reservation> findByUserId(Long userId);
 
-    @Query("select coalesce(sum(r.quantity),0) from Reservation r where r.event.id = :eventId and r.status = :status")
+
+    List<Reservation> findByUserEmailOrderByCreatedAtDesc(String email);
+
+
+    @Query("""
+        select coalesce(sum(r.quantity),0)
+        from Reservation r
+        where r.event.id = :eventId and r.status = :status
+    """)
     Integer sumQuantityByEventAndStatus(Long eventId, ReservationStatus status);
-}
 
+    @Query("""
+        select coalesce(sum(r.quantity),0)
+        from Reservation r
+        where r.status = :status
+    """)
+    Integer sumQuantityByStatus(ReservationStatus status);
+}

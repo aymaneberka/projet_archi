@@ -26,4 +26,9 @@ public class AuthController {
     public AuthResponse login(@Valid @RequestBody LoginRequest req) {
         return authService.login(req);
     }
+
+    @PostMapping("/refresh")
+    public AuthResponse refresh(@RequestHeader("Authorization") String authorization) {
+        return authService.refresh(authorization);
+    }
 }

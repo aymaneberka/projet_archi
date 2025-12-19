@@ -41,5 +41,51 @@ public class Event {
 
     @Column(nullable=false, precision = 12, scale = 2)
     private BigDecimal ticketPrice;
-}
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getOrganizer() {
+        return organizer;
+    }
+
+    public List<String> getParticipants() {
+        return participants;
+    }
+
+    public BigDecimal getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public Integer getTicketLimit() {
+        return ticketLimit;
+    }
+
+    public void setTitle(String title) { this.title = title; }
+    public void setDescription(String description) { this.description = description; }
+    public void setLocation(String location) { this.location = location; }
+    public void setOrganizer(String organizer) { this.organizer = organizer; }
+    public void setParticipants(List<String> participants) { this.participants = participants; }
+    public void setTicketLimit(Integer ticketLimit) { this.ticketLimit = ticketLimit; }
+    public void setDateTime(LocalDateTime dateTime) { this.dateTime = dateTime; }
+    public void setTicketPrice(BigDecimal ticketPrice) { this.ticketPrice = ticketPrice; }
+
+
+}

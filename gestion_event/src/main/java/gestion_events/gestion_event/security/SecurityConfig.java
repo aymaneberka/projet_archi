@@ -27,7 +27,8 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**", "/error").permitAll()
-                        .requestMatchers("/graphiql/**", "/graphql").permitAll() // on sécurisera GraphQL après
+                        .requestMatchers("/graphiql/**").permitAll() // laisser la console GraphiQL accessible
+                        .requestMatchers("/graphql").authenticated()  // sécuriser les requêtes GraphQL
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

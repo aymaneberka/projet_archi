@@ -20,7 +20,7 @@ public class UserController {
 
     @GetMapping("/me")
     public UserMeResponse me(Authentication authentication) {
-        String email = authentication.getName(); // username = email dans ton JWT
+        String email = authentication.getName();
         User user = userService.getByEmailOrThrow(email);
 
         return new UserMeResponse(

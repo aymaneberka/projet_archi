@@ -63,6 +63,17 @@ public class JwtService {
         return List.of();
     }
 
+    public String extractTokenValue(String bearerHeader) {
+        if (bearerHeader == null) {
+            throw new RuntimeException("Authorization manquant");
+        }
+        String prefix = "Bearer ";
+        if (bearerHeader.startsWith(prefix)) {
+            return bearerHeader.substring(prefix.length());
+        }
+        return bearerHeader;
+    }
+
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
                 .verifyWith(signingKey())

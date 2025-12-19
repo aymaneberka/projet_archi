@@ -33,6 +33,7 @@ type Event {
   organizer: String!
   participants: [String!]!
   ticketLimit: Int!
+  availableTickets: Int!
   ticketPrice: Float!
 }
 
@@ -52,6 +53,12 @@ type Payment {
   amount: Float!
   status: PaymentStatus!
   createdAt: String!
+}
+
+type AdminStats {
+  eventsCount: Int!
+  ticketsSold: Int!
+  revenue: Float!
 }
 
 ########################
@@ -78,12 +85,16 @@ type Query {
   #  EVENTS
   events: [Event!]!
   eventById(id: ID!): Event
+  whoami: String!
 
   #  RESERVATIONS
   myReservations: [Reservation!]!
 
   #  DISPONIBILITÉ
   availableTickets(eventId: ID!): Int!
+
+  #  ADMIN
+  adminStats: AdminStats!
 }
 
 ########################
