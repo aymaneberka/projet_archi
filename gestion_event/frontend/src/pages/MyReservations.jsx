@@ -4,7 +4,9 @@ import { useMutation, useQuery } from "@apollo/client/react";
 import { MY_RESERVATIONS, PAY_RESERVATION } from "../api/gpl";
 
 export default function MyReservations() {
-    const { data, loading, error, refetch } = useQuery(MY_RESERVATIONS);
+    const { data, loading, error, refetch } = useQuery(MY_RESERVATIONS, {
+        fetchPolicy: "network-only",
+    });
     const [payReservation] = useMutation(PAY_RESERVATION);
     const [payingId, setPayingId] = useState(null);
     const [msg, setMsg] = useState("");

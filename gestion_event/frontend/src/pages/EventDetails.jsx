@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client/react";
-import { CREATE_RESERVATION, GET_EVENT_DETAILS } from "../api/gpl";
+import { CREATE_RESERVATION, GET_EVENT_DETAILS, MY_RESERVATIONS } from "../api/gpl";
 import { useAuth } from "../auth/AuthContext";
 
 export default function EventDetails() {
@@ -15,9 +15,12 @@ export default function EventDetails() {
     const { data, loading, error, refetch } = useQuery(GET_EVENT_DETAILS, {
         variables: { id },
         skip: !id,
+        fetchPolicy: "cache-and-network",
     });
 
-    const [createReservation, { loading: reserving }] = useMutation(CREATE_RESERVATION);
+    const [createReservation, { loading: reserving }] = useMutation(CREATE_RESERVATION, {
+        refetchQueries: [{ query: MY_RESERVATIONS }],
+    });
 
     const onSubmit = async (e) => {
         e.preventDefault();
